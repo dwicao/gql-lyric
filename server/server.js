@@ -4,6 +4,9 @@ const expressGraphQL = require('express-graphql');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const schema = require('./schema/schema');
+const webpackMiddleware = require('webpack-dev-middleware');
+const webpack = require('webpack');
+const webpackConfig = require('../webpack.config.js');
 require('dotenv').config();
 
 const app = express();
@@ -25,9 +28,6 @@ app.use('/graphql', expressGraphQL({
   graphiql: true
 }));
 
-const webpackMiddleware = require('webpack-dev-middleware');
-const webpack = require('webpack');
-const webpackConfig = require('../webpack.config.js');
 app.use(webpackMiddleware(webpack(webpackConfig)));
 
 module.exports = app;
