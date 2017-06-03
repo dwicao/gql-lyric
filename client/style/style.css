@@ -6,4 +6,10 @@
 
 .material-icons {
   cursor: pointer;
+  margin-left: 5px;
+}
+
+.vote-box {
+  display: flex;
+  align-items: center;
 }
