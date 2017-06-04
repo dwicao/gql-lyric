@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
 import query from '../queries/fetchSongs';
+import apolloHandler from 'react-apollo-handler';
+import Loading from './Loading';
 
 class SongList extends Component {
   onSongDelete(id) {
@@ -27,8 +29,6 @@ class SongList extends Component {
   }
   
   render() {
-    if (this.props.data.loading) return <div>Loading...</div>
-
     return (
       <div>
         <ul className="collection">
@@ -53,6 +53,8 @@ const mutation = gql`
   }
 `;
 
+const songListWithLoading = apolloHandler(Loading)(SongList);
+
 export default graphql(mutation)(
-  graphql(query)(SongList)
+  graphql(query)(songListWithLoading)
 );
